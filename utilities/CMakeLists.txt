@@ -18,7 +18,7 @@ if (MAVS_USE_EMBREE)
         rp3d_vehicle_viewer
         scene_viewer
         heightmap_generator
-		heightmap_to_mesh
+		#heightmap_to_mesh
         path_tracer_render
         batch_obj_convert)
     add_subdirectory(scene_editor)
