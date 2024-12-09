@@ -49,8 +49,8 @@
       ]
     },
     {
-      "Mesh": "vegetation/misc/Grass_02.obj",
-      "Rotate Y to Z": true,
+      "Mesh": "vegetation/grass/grass_clump_2.obj",
+      "Rotate Y to Z": false,
       "Random": {
         "Offset": [ 0.0, 0.0, 0.0 ],
         "Number": 5000,
@@ -60,7 +60,7 @@
           [ 300, 300 ],
           [ 300, -300 ]
         ],
-        "Scale": [ 0.25, 0.5 ]
+        "Scale": [ 0.85, 1.15 ]
       }
     }
   ]

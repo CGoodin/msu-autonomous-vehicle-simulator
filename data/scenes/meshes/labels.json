@@ -165,6 +165,9 @@
     [ "vegetation/USA_East/EA08m.obj", "high vegetation" ],
     [ "vegetation/USA_East/EA08y.obj", "high vegetation" ],
 
+    [ "vegetation/oak/oak.obj", "high vegetation" ],
+    [ "vegetation/oak/oak_autumn.obj", "high vegetation" ],
+
     [ "vegetation/USA_East/EA10a.obj", "high vegetation" ],
     [ "vegetation/USA_East/EA10m.obj", "high vegetation" ],
     [ "vegetation/USA_East/EA10y.obj", "high vegetation" ],
@@ -224,6 +227,9 @@
     [ "vehicles/l200/L200-Obj_rot_scale_trans2.obj", "vehicle" ],
 
     [ "vehicles/piper_pa18/piper_pa18_rotated_v2.obj", "uav" ],
+
+    [ "vegetation/oat_grass/oat_grass_5.obj", "low vegetation" ],
+
     [ "vegetation/Groundcover/GC08_1.obj", "low vegetation" ],
     [ "vegetation/Groundcover/GC08_2.obj", "low vegetation" ],
     [ "vegetation/Groundcover/GC08_3.obj", "low vegetation" ],
@@ -250,13 +256,46 @@
 
     [ "vegetation/misc/Grass_01.obj", "low vegetation" ],
     [ "vegetation/misc/Grass_02.obj", "low vegetation" ],
+    [ "vegetation/grass/Grass_02.obj", "low vegetation" ],
     [ "vegetation/misc/Grass_03.obj", "low vegetation" ],
+
+    [ "vegetation/fern/fern_1.obj", "low vegetation" ],
+    [ "vegetation/fern/fern_2.obj", "low vegetation" ],
+    [ "vegetation/fern/fern_3.obj", "low vegetation" ],
+
+    [ "vegetation/grass/grass_clump_1.obj", "low vegetation" ],
+    [ "vegetation/grass/grass_clump_2.obj", "low vegetation" ],
+    [ "vegetation/greater_celandine/greater_celandine_1.obj", "low vegetation" ],
 
     [ "vegetation/misc/grass_blade_10mm.obj", "low vegetation" ],
     [ "vegetation/misc/grass_blade_20mm.obj", "low vegetation" ],
     [ "vegetation/misc/grass_blade_30mm.obj", "low vegetation" ],
 
     [ "vegetation/Landscaping/LS13_01.obj", "high vegetation" ],
+
+    [ "vegetation/bamboo/bamboo.obj", "high vegetation" ],
+    [ "vegetation/weeping_cherry/weeping_cherry_tree.obj", "high vegetation" ],
+    [ "vegetation/peach_tree/peach_tree.obj", "high vegetation" ],
+    [ "vegetation/black_poplar/black_poplar_2.obj", "high vegetation" ],
+    [ "vegetation/oak/oak.obj", "high vegetation" ],
+    [ "vegetation/oak/oak_autumn.obj", "high vegetation" ],
+    [ "vegetation/oak_v5/oak_v5.obj", "high vegetation" ],
+    [ "vegetation/oak_v9/oak_v9.obj", "high vegetation" ],
+    [ "vegetation/pine_tree/pine_tree.obj", "high vegetation" ],
+
+    [ "vegetation/honey_locust/honey_locust_1.obj", "high vegetation" ],
+    [ "vegetation/honey_locust/honey_locust_2.obj", "high vegetation" ],
+    [ "vegetation/honey_locust/honey_locust_3.obj", "high vegetation" ],
+    [ "vegetation/honey_locust/honey_locust_4.obj", "high vegetation" ],
+    [ "vegetation/honey_locust/honey_locust_5.obj", "high vegetation" ],
+    [ "vegetation/honey_locust/honey_locust_6.obj", "high vegetation" ],
+
+    [ "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_1.obj", "high vegetation" ],
+    [ "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_2.obj", "high vegetation" ],
+    [ "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_3.obj", "high vegetation" ],
+    [ "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_4.obj", "high vegetation" ],
+    [ "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_5.obj", "high vegetation" ],
+    [ "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_6.obj", "high vegetation" ],
 
     [ "vehicles/hmmwv/hmmwv.obj", "vehicle" ],
     [ "vehicles/hmmwv/hmmwv_centered.obj", "vehicle" ],
