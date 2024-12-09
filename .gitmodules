@@ -19,4 +19,4 @@
 	url = https://github.com/dtschump/CImg.git
 [submodule "extern/TinyFileDialogs"]
 	path = extern/TinyFileDialogs
-	url = git://git.code.sf.net/p/tiny
+	url = git://git.code.sf.net/p/tinyfiledialogs/code
