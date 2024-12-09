@@ -1,7 +1,6 @@
 [submodule "extern/embree"]
 	path = extern/embree
-	url = https://github.com/embree/embree.git
-	branch = v3.6.1
+	url = https://github.com/embree/embree.github.com/commit/1ef0ced9ef8fc3dc968256a3633a981870874a5e
 [submodule "extern/glm"]
 	path = extern/glm
 	url = https://github.com/g-truc/glm.git
