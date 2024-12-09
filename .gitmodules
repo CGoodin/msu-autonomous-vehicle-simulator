@@ -1,6 +1,7 @@
 [submodule "extern/embree"]
 	path = extern/embree
 	url = https://github.com/embree/embree.git
+	branch = v3.6.1
 [submodule "extern/glm"]
 	path = extern/glm
 	url = https://github.com/g-truc/glm.git
@@ -18,4 +19,4 @@
 	url = https://github.com/dtschump/CImg.git
 [submodule "extern/TinyFileDialogs"]
 	path = extern/TinyFileDialogs
-	url = git://git.code.sf.net/p/tinyfiledialogs/code
+	url = git://git.code.sf.net/p/tiny
