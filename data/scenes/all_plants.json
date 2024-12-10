@@ -185,7 +185,7 @@
           "Scale": [ 1.0, 1.0, 1.0 ]
         }
       ]
-    }
+    },
 
     {
       "Mesh": "vegetation/narrow_leaved_paperbark/narrow_leaved_paperbark_1.obj",

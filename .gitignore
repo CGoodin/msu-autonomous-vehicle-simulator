@@ -5,7 +5,7 @@
 */*.vscode
 */*/*.vs
 */*/*.vscode
-build*
+build
 install*
 !build*.bmp
 doxygen/html
