@@ -1,18 +1,25 @@
 /*
-Non-Commercial License - Mississippi State University Autonomous Vehicle Software (MAVS)
+MIT License
 
-ACKNOWLEDGEMENT:
-Mississippi State University, Center for Advanced Vehicular Systems (CAVS)
+Copyright (c) 2024 Mississippi State University
 
-*NOTICE*
-Thank you for your interest in MAVS, we hope it serves you well!  We have a few small requests to ask of you that will help us continue to create innovative platforms:
--To share MAVS with a friend, please ask them to visit https://gitlab.com/cgoodin/msu-autonomous-vehicle-simulator to register and download MAVS for free.
--Feel free to create derivative works for non-commercial purposes, i.e. academics, U.S. government, and industry research.  If commercial uses are intended, please contact us for a commercial license at otm@msstate.edu or jonathan.rudd@msstate.edu.
--Finally, please use the ACKNOWLEDGEMENT above in your derivative works.  This helps us both!
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Please visit https://gitlab.com/cgoodin/msu-autonomous-vehicle-simulator to view the full license, or email us if you have any questions.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Copyright 2018 (C) Mississippi State University
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 /**
  * \file raytracer.h
@@ -30,6 +37,7 @@ Copyright 2018 (C) Mississippi State University
 #define RAYTRACER_H
 
 #include <vector>
+#include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <raytracers/material.h>
@@ -45,16 +53,29 @@ namespace raytracer{
  * is no intersection, it should return a negative distance.
  */
 struct Intersection{
-  glm::vec3 color;
-  Material material;
-  glm::vec3 normal;
-  float dist;
+	Intersection() : color(zero_vec3), normal(one_vec3), dist(0.0f), velocity(zero_vec3),object_id(0) {}
+	glm::vec3 color;
+	Material material;
+	glm::vec3 normal;
+	float dist;
 	glm::vec3 velocity;
-  int object_id;
+	int object_id;
 	std::string object_name;
 	std::string label;
 	std::string spectrum_name;
 };
+
+inline std::ostream& operator<<(std::ostream& os, const Intersection& obj) {
+	os << "object_name, id: " << obj.object_name << " " << obj.object_id << std::endl;
+	os << "color:  " << obj.color.x << " " << obj.color.y << " " << obj.color.z << std::endl;
+	os << "normal: " << obj.normal.x << " " << obj.normal.y << " " << obj.normal.z << std::endl;
+	os << "velocity " << obj.velocity.x << " " << obj.velocity.y << " " << obj.velocity.z << std::endl;
+	os << "dist, id: " << obj.dist << " " << obj.object_id << std::endl;
+	os << "label: " << obj.label << std::endl;
+	os << "spectrum: " << obj.spectrum_name << std::endl;
+	os << "material: " << obj.material;
+	return os;
+}
 
 /**
  * Base class for raytracers in the MAVS simulation. The environment structure 
@@ -69,6 +90,8 @@ class Raytracer {
 		perform_labeling_ = false;
 		use_spectral_ = false;
 		use_surface_textures_ = true;
+		lower_left_corner_ = glm::vec3(0.0f, 0.0f, 0.0f);
+		upper_right_corner_ = glm::vec3(0.0f, 0.0f, 0.0f);
 	}
 
   /**

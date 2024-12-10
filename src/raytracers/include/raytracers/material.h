@@ -1,24 +1,31 @@
 /*
-Non-Commercial License - Mississippi State University Autonomous Vehicle Software (MAVS)
+MIT License
 
-ACKNOWLEDGEMENT:
-Mississippi State University, Center for Advanced Vehicular Systems (CAVS)
+Copyright (c) 2024 Mississippi State University
 
-*NOTICE*
-Thank you for your interest in MAVS, we hope it serves you well!  We have a few small requests to ask of you that will help us continue to create innovative platforms:
--To share MAVS with a friend, please ask them to visit https://gitlab.com/cgoodin/msu-autonomous-vehicle-simulator to register and download MAVS for free.
--Feel free to create derivative works for non-commercial purposes, i.e. academics, U.S. government, and industry research.  If commercial uses are intended, please contact us for a commercial license at otm@msstate.edu or jonathan.rudd@msstate.edu.
--Finally, please use the ACKNOWLEDGEMENT above in your derivative works.  This helps us both!
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Please visit https://gitlab.com/cgoodin/msu-autonomous-vehicle-simulator to view the full license, or email us if you have any questions.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Copyright 2018 (C) Mississippi State University
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
 #include <string>
-
+#include <iostream>
 #include <glm/glm.hpp>
 
 #include <mavs_core/math/constants.h>
@@ -28,7 +35,7 @@ namespace mavs{
 /// Material structure based on wavefront .mtl file
 struct Material{
 Material() : ka(zero_vec3), kd(one_vec3), ks(zero_vec3), tr(zero_vec3),
-    ke(zero_vec3), ns(2.0f), ni(-1.0f), dissolve(0.0f) {}
+    ke(zero_vec3), ns(2.0f), ni(-1.0f), dissolve(0.0f), illum(1.0f) {}
   /// Name of the material
   std::string name;
   /// Ambient RGB reflectance
@@ -61,27 +68,27 @@ Material() : ka(zero_vec3), kd(one_vec3), ks(zero_vec3), tr(zero_vec3),
   std::string disp;
   /// Name of spectrum file for the  material
   std::string refl;
-	Material(const Material &mat){
-		name = mat.name;
-		ka = mat.ka;
-		kd = mat.kd;
-		ks = mat.ks;
-		tr = mat.tr;
-		ke = mat.ke;
-		ns = mat.ns;
-		ni = mat.ni;
-		dissolve = mat.dissolve;
-		illum = mat.illum;
-		map_kd = mat.map_kd;
-		map_ka = mat.map_ka;
-		map_ks = mat.map_ks;
-		map_ns = mat.map_ns;
-		map_bump = mat.map_bump;
-		map_d = mat.map_d;
-		disp = mat.disp;
-		refl = mat.refl;
-	}
 };
+
+inline std::ostream& operator<<(std::ostream& os, const Material& obj) {
+	os << "name: " << obj.name << std::endl;
+	os << "ka:  " << obj.ka.x << " " << obj.ka.y << " " << obj.ka.z << std::endl;
+	os << "kd:  " << obj.kd.x << " " << obj.kd.y << " " << obj.kd.z << std::endl;
+	os << "ks:  " << obj.ks.x << " " << obj.ks.y << " " << obj.ks.z << std::endl;
+	os << "tr:  " << obj.tr.x << " " << obj.tr.y << " " << obj.tr.z << std::endl;
+	os << "ke:  " << obj.ke.x << " " << obj.ke.y << " " << obj.ke.z << std::endl;
+	os << "ns, ni: " << obj.ns << " " << obj.ni << std::endl;
+	os << "dissolve, illum: " << obj.dissolve << " " << obj.illum << std::endl;
+	std::cout << "maps: " << std::endl;
+	if (obj.map_kd.length() > 0)std::cout << "\t " << obj.map_kd << " ";
+	if (obj.map_ks.length() > 0)std::cout << "\t " << obj.map_ks << " ";
+	if (obj.map_ns.length() > 0)std::cout << "\t " << obj.map_ns << " ";
+	if (obj.map_bump.length() > 0)std::cout << "\t " << obj.map_bump << " ";
+	if (obj.map_d.length() > 0)std::cout << "\t " << obj.map_d << " ";
+	if (obj.disp.length() > 0)std::cout << "\t " << obj.disp << " ";
+	if (obj.refl.length() > 0)std::cout << "\t " << obj.refl;
+	return os;
+}
 
 } // namespace mavs
 
