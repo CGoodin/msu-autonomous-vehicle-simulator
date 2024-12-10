@@ -279,7 +279,7 @@ void EmbreeTracer::LoadVegDistribution(const rapidjson::Value& d) {
 					float ee = veg_data_points[i].x; 
 					float nn = veg_data_points[i].y; 
 					//float d = sqrt((ee - easting)*(ee - easting) + (nn - northing)*(nn - northing));
-					float d = pow((ee - easting)*(ee - easting) + (nn - northing)*(nn - northing),3);
+					float d = powf((ee - easting)*(ee - easting) + (nn - northing)*(nn - northing),3);
 					if (d > 0.0f){
 						dens_numerator += veg_data_points[i].veg[si].density/d; 
 						if (veg_data_points[i].veg[si].min_diameter < min_diam && veg_data_points[i].veg[si].min_diameter!=0.0f)min_diam = veg_data_points[i].veg[si].min_diameter;
@@ -1658,7 +1658,7 @@ void EmbreeTracer::GetClosestIntersection(glm::vec3 origin, glm::vec3 direction,
 			}
 			int mnum = meshes_[instID].GetMatNum(query.hit.primID);
 			Material * return_mat = meshes_[instID].GetMaterial(mnum);
-
+			
 			//check transparency
 			float trans = 1.0;
 			if (return_mat->map_d.length() > 0) {
@@ -1675,6 +1675,7 @@ void EmbreeTracer::GetClosestIntersection(glm::vec3 origin, glm::vec3 direction,
 				if (return_mat->map_kd.length() > 0) {
 					int up = 0;
 					int vp = 0;
+					
 					GetInterpolatedTextures(instID, query.hit.primID,
 						textures_[return_mat->map_kd].width(),
 						textures_[return_mat->map_kd].height(),
@@ -1685,7 +1686,9 @@ void EmbreeTracer::GetClosestIntersection(glm::vec3 origin, glm::vec3 direction,
 						return_mat->kd.y*textures_[return_mat->map_kd](up, vp, 1, 0);
 					inter.color.z =
 						return_mat->kd.z*textures_[return_mat->map_kd](up, vp, 2, 0);
+					
 				}
+
 				if (use_spectral_) {
 					if (return_mat->refl.length() > 0) {
 						if (spectra_.count(return_mat->refl) > 0) {
@@ -1697,34 +1700,27 @@ void EmbreeTracer::GetClosestIntersection(glm::vec3 origin, glm::vec3 direction,
 						}
 					}
 				}
-				if (meshes_[inst_to_meshnum_[(int)query.hit.instID[0]]].HasNormals()) {
-					glm::vec3 normal = GetInterpolatedNormal(inst_to_meshnum_[(int)query.hit.instID[0]], query.hit.primID, query.hit.u, query.hit.v, direction);
-					glm::vec4 new_n = glm::rotate(meshes_[(int)query.hit.instID[0]].GetOrientation(), glm::vec4(normal.x, normal.y, normal.z, 0.0f));
-					inter.normal = glm::vec3(new_n.x, new_n.y, new_n.z);
-				}
-				else {
+				//if (meshes_[inst_to_meshnum_[(int)query.hit.instID[0]]].HasNormals()) {
+				//	glm::vec3 normal = GetInterpolatedNormal(inst_to_meshnum_[(int)query.hit.instID[0]], query.hit.primID, query.hit.u, query.hit.v, direction);
+				//	glm::vec4 new_n = glm::rotate(meshes_[(int)query.hit.instID[0]].GetOrientation(), glm::vec4(normal.x, normal.y, normal.z, 0.0f));
+				//	inter.normal = glm::vec3(new_n.x, new_n.y, new_n.z);
+				//}
+				//else {
 					glm::vec3 normal(query.hit.Ng_x, query.hit.Ng_y, query.hit.Ng_z);
 					glm::quat rotquat = meshes_[instID].GetOrientation();
 					glm::mat3x3 rotmat(rotquat);
 					normal = rotmat * normal;
 					float mag = glm::length(normal);
-					if (mag > 0.0f) {
+					if (mag > 1.0E-4f) {
 						inter.normal = normal / mag;
 					}
 					else {
 						inter.normal = glm::vec3(query.hit.Ng_x, query.hit.Ng_y, query.hit.Ng_z);
 						inter.normal = inter.normal / glm::length(inter.normal);
 					}
-				}
+				//}
 				inter.dist = dist_accumulator + query.ray.tfar;
-				//need to make a copy constructor at some point
-				inter.material.ks = return_mat->ks;
-				inter.material.kd = return_mat->kd;
-				inter.material.ka = return_mat->ka;
-				inter.material.ns = return_mat->ns;
-				inter.material.ni = return_mat->ni;
-				inter.material.name = return_mat->name;
-				inter.material.ke = return_mat->ke;
+				inter.material = *return_mat;
 				break;
 			} // if not transparent
 			else { //it is transparent

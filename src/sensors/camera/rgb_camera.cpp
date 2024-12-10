@@ -94,9 +94,9 @@ void RgbCamera::SetEnvironmentProperties(environment::Environment* env) {
 RgbPixel RgbCamera::RenderPixel(environment::Environment* env, glm::vec3 direction) {
 	RgbPixel intersection;
 	intersection.object_id = -1;
-	//raytracer::Intersection inter = env->GetClosestIntersection(position_, direction);
-	raytracer::Intersection inter;
-	env->GetClosestIntersection(position_, direction, inter);
+	raytracer::Intersection inter = env->GetClosestIntersection(position_, direction);
+	//raytracer::Intersection inter;
+	//env->GetClosestIntersection(position_, direction, inter);
 	glm::vec3 color = zero_vec3;
 	float range = std::numeric_limits<float>::max();
 	if (inter.dist > 0.0f) {
@@ -878,6 +878,8 @@ void RgbCamera::Update(environment::Environment* env, double dt) {
 	CheckFreq(dt);
 
 	RenderFrame(env, dt);
+
+	AdjustSaturationAndTemperature(1.25f, 9500.0f);
 
 	CopyBufferToImage();
 
