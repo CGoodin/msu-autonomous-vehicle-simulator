@@ -97,7 +97,7 @@ Create a directory in the MAVS folder called `build` and another called `install
 * Configure once more
 * Click Generate to generate solutions
 * Click Open Project to open the solutions in Visual Studio
-* Build the INSTALL solution to build and install MAVS
+* From the top menu, select Build->Build Solution to build MAVS.
 
 **If you get build errors related to ReactPhysics3D (RP3D)**: In your CMake dialog box, uncheck "BUILD_SHARED_LIBS", reconfigure, and rebuild.
 
