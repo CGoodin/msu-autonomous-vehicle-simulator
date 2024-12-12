@@ -633,9 +633,9 @@ struct DrivingCommand{
 
 /*! \mainpage The MSU Autonomous Vehicle Simulator (MAVS)
  * 
- * This is the C++ API documentation for MAVS, a simulator for autonomous ground robotics.
+ * This is the C++ API documentation for MAVS, a simulator for autonomous ground vehicles.
  *
- * For access to the source code, see https://gitlab.com/cgoodin/msu-autonomous-vehicle-simulator.
+ * For access to the source code, see https://github.com/CGoodin/msu-autonomous-vehicle-simulator.
  * 
- * For installation and user guide, see the wiki at https://gitlab.com/cgoodin/msu-autonomous-vehicle-simulator/wikis/home.
+ * For installation and user guide, see the documentation at https://mavs-documentation.readthedocs.io/en/latest/.
  */
