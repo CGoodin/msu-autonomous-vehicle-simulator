@@ -1,8 +1,22 @@
 ---
 ---
 
-@import "{{ site.theme }}";
+@import 'jekyll-theme-leap-day'
+;
 
-$primary-color: #00a0e0; 
+body {
+    font: unset;
+    color: #000000;
+}
 
-$accent-color: #f0d000; 
+header {
+    background: #000000;
+
+    h1 {
+        color: #5D1725;
+    }
+}
+
+#banner {
+    background: #C1C6C8;
+}
