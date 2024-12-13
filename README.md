@@ -1,109 +1,46 @@
 # The MSU Autonomous Vehicle Simulator
 
-Software for simulating autonomous ground vehicles in off-road terrain. Simulates the sensors, vehicle, and environment. Uses physics-based models to simulate camera, lidar, and radar interacting with environmental features such as rain, dust, and fog.
+The MSU Autonomous Vehicle Simulator (MAVS) is
 
-MAVS is written in C++ and has a Python API. [Detailed documentation](https://mavs-documentation.readthedocs.io/en/latest/) is available on ReadTheDocs.
+* A software library for simulating autonomous vehicles in realistic digital terrain.
+* A real-time simulator for evaluating the performance of autonomous perception and navigation software.
+* A physics-based sensor simulator for LIDAR, GPS, cameras, and other sensors.
 
-The MAVS API is documented with DoxyGen [here](https://cgoodin.gitlab.io/msu-autonomous-vehicle-simulator/).
+While MAVS is a fully functional standalone simulator, additional wrappers allow MAVS to be integrated with robotic development tools such the Robotic Operating System (ROS). 
 
-## Reference MAVS
-You can reference MAVS with the following citations:
-* Hudson, C., Goodin, C., Miller, Z., Wheeler, W., & Carruth, D. (2020, August). Mississippi state university autonomous vehicle simulation library. In Proceedings of the Ground Vehicle Systems Engineering and Technology Symposium (pp. 11-13).
-* Goodin, C., Carruth, D. W., Dabbiru, L., Hudson, C. H., Cagle, L. D., Scherrer, N., ... & Jayakumar, P. (2022, June). Simulation-based testing of autonomous ground vehicles. In Autonomous Systems: Sensors, Processing and Security for Ground, Air, Sea and Space Vehicles and Infrastructure 2022 (Vol. 12115, pp. 167-174). SPIE.
+This documentation outlines building MAVS, running some example simulations, and interfacing with other software like ROS. 
 
-# Installation 
-## Building MAVS From Source
-MAVS can be built from source on both Windows and Linux/Unix systems.
- 
-(Jump to [building on Linux.](#building-mavs-on-linux))
+## MAVS Architecture 
+The MAVS is a software library that can be incorporated into a variety of applications through its applicaton programming interface (API). Please see the [API documentation](https://cgoodin.gitlab.io/msu-autonomous-vehicle-simulator/) for information on developing applications with MAVS.
 
-(Jump to [building on Windows.](#building-mavs-on-windows))
+## Building Mavs
+See instructions [for building MAVS](docs/MavsBuildInstructions.md).
 
-### System Requirements
-For all operating systems, you will need a [CMake](https://cmake.org/) version above 3.13.
+## Running the Mavs Gui
+On Linux systems with Python3 installed, MAVS simulations can be run with a [TKinter-based GUI](docs/Gui/RunningMavsGUI). The MAVS GUI can be used to set up and run sensor simulations in [randomized scenes](docs/Gui/GeneratingRandomDataWithGUI.md).
 
-You will also need [git](https://git-scm.com/download/). 
+## Using the MAVS C++ API
+Portions of the MAVS API can be accessed in [MATLAB](docs/Interfaces/MavsMatlab) or [Python](docs/Interfaces/MavsPython.md) through the C interfaces.
 
-You will need a compiler that supports the CPP 17 standard (gcc 8 or higher or equivalent).
+## MAVS-ROS Package
+The mavs_ros package has example [ROS-nodes](docs/Interfaces/MavsROS.md) built around MAVS simulation capabilities. 
 
-To run the python interface, you will also need to install [Python 3](https://www.python.org/downloads/release/python-370/). For Ubuntu users, you simply need to [install using apt](https://phoenixnap.com/kb/how-to-install-python-3-ubuntu). For Windows, you will also need to download and run the installer and add the folder containing the python.exe to your system path. 
+## Running simulations from the command line
+Several MAVS executables can be run [from the commmand line.](docs/RunningASimulation.md)
 
-### Cloning the MAVS repository
-The steps for cloning MAVS are the same on both Windows and Linux/Unix. First clone the MAVS repo and name it "mavs". On Linux systems, it is recommended that you install MAVS in your home directory. 
-```bash
-cd ~
-git clone --recursive https://github.com/CGoodin/msu-autonomous-vehicle-simulator.git mavs
-```
-MAVS has multiple dependencies configured as [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so you **must** include the "--recursive" option to successfully build MAVS.
+## MAVS Input Files
+MAVS primarily uses [json input files](docs/MavsSimulationInputsFiles.md). 
 
-### Building MAVS on Linux
-This section outlines how to build MAVS using terminal commands on Linux. Aptitude is the package manager used in the example commands for installing system dependencies. Users of different package managers will need to determine how to ensure the same dependencies are installed on their own. MAVS has been installed and tested on both Ubuntu and CentOS systems.
+## MAVS Sensor Models
+MAVS features several different types of sensors including [cameras](docs/Sensors/MavsCamera.md), [LIDAR](docs/Sensors/MavsLidar.md), GPS, [RADAR](docs/Sensors/MavsRadar.md) and [IMUs](docs/Sensors/MavsImu.md).
 
-#### System Dependencies
-Ensure X11, libJPEG, and zlib development packages are installed. For example, on Ubuntu or Debian systems, execute the following:
-```bash
-sudo apt-get install libx11-dev libjpeg-dev zlib1g-dev
-```
-Older versions of distros may not have a sufficiently up-to-date cmake package. If cmake is not 3.13+, it will need to be updated as well. Doing so varies depending on distro but for Ubuntu, [Kitware's APT repository](https://apt.kitware.com/) is the recommended method. Navigate to that site and follow the steps for your version of Ubuntu.
+MAVS can also be used to render [photorealistic images](docs/Sensors/MavsPathTracer.md).
 
-#### Installing MAVS on Linux
-Presuming Embree and other system dependencies are now installed and available, MAVS can now be installed. To build MAVS in the default configuration, run the following from the repo's root directory:
-```bash
-cd ~/mavs
-mkdir build
-cd build
-sudo ccmake ../
-```
-Use the ccmake tool to configure the MAVS build. Make sure to set the build type to "Release". Also ensure that the **DEFAULT_DATA_DIR** is set to point to your MAVS data folder. If you followed the steps above, then it should be set to *~/mavs/data*. 
+## MAVS Vehicle Models
+MAVS has a built-in [vehicle simulator](docs/Vehicles/MavsVehicles.md) and can also be linked to the [Chrono vehicle dynamics](docs/MavsBuildInstructions.md)
 
-It is reccomended that you set the **CMAKE_INSTALL_PREFIX** to */usr/local* if possible. If you install MAVS in a custom folder, you will need to set the CMAKE_PREFIX_PATH variable when linking other programs to MAVS using the *find_package* feature of CMake.
-
-For a basic OpenMP-enable MAVS build, set the following options:
-  * DEFAULT_DATA_DIR: ~/mavs/data
-  * CMAKE_INSTALL_PREFIX: /usr/local
-    * It is recommended that you install MAVS in your usr/local folder on Linux systems.
-  * CMAKE_CONFIGURATION_TYPE: Release
-  * Unless you wish to build Chrono, uncheck "MAVS_USE_CHRONO"
-  * Unless you wish to use MAVS on a supercomputer, uncheck USE_MPI and make sure USE_OMP is checked.
-
-You can then build MAVS with
-```bash
-$sudo make install
-```
-
-For running MAVS and linking MAVS to external applications, you may need to add the MAVS libraries to your system path. If MAVS was installed in */usr/local* as recommended above, this can be done by adding the following lines to your .bashrc file.
-```bash
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/"
-export PATH="$PATH:/usr/local/lib"
-```
-
-### Building MAVS on Windows
-This section discusses building Mavs on Windows. The [CMake GUI](https://cmake.org/download/) will be used to generate solutions for [Microsoft Visual Studio](https://www.visualstudio.com/downloads/). The zipped version of CMake's distributables can be run without installation with administrator privileges if necessary. When installing Visual Studio, make sure you select the C and C++ compilers for your installation.
-
-If you wish to build the MPI version of the code (not recommended for desktop computers), you will also need to install the [Microsoft MPI compiler and SDK](https://www.microsoft.com/en-us/download/details.aspx?id=56727).
-
-#### Installing MAVS on Windows
-Create a directory in the MAVS folder called `build` and another called `install`. Start the CMake GUI and perform the following steps:
-
-* Select the MAVS repo as the source directory and the select `./mavs/build` as the build directory.
-* Click the Configure button and select the appropriate version of Visual Studio to populate the initial CMakeCache. New options should appear highlighted in red.
-* For a basic OpenMP-enable MAVS build, set the following options:
-  * DEFAULT_DATA_DIR: `./mavs/data`
-  * CMAKE_INSTALL_PREFIX: `./mavs/install`
-    * It is recommended that you install MAVS in your mavs/install folder. Administrator privileges are needed to install MAVS to the default location in `Program Files`.
-  * CMAKE_CONFIGURATION_TYPE: Release
-  * Unless you wish to build Chrono, uncheck "MAVS_USE_CHRONO"
-  * Unless you wish to use MAVS on a supercomputer, uncheck USE_MPI and make sure USE_OMP is checked.    
-* Configure once more
-* Click Generate to generate solutions
-* Click Open Project to open the solutions in Visual Studio
-* From the top menu, select Build->Build Solution to build MAVS.
-
-**If you get build errors related to ReactPhysics3D (RP3D)**: In your CMake dialog box, uncheck "BUILD_SHARED_LIBS", reconfigure, and rebuild.
-
-You may need to [add the library install location to your system path](./InstallingMavsBinaries.md) for MAVS to run correctly. This sometimes requires a restart of your computer.
-
-To add a shortcut to the MAVS GUI to your Desktop, open the file browser and navigate to <MAVS_INSTALL_DIR>/bin. Right click on *mavs_gui* and select *Send to->Desktop (create shortcut)*.
+## Examples and Utilities
+MAVS comes with several [example codes](docs/Examples/MavsExamples.md) and [utilitys](docs/Utilities/MavsUtils.md) that demonstrate how to implement various features through the API.
 
 ## Features
 MAVS can automatically generate random ecosystems complete with trails and realistic vegetation.
