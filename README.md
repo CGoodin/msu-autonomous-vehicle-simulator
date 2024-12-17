@@ -1,5 +1,5 @@
 # The MSU Autonomous Vehicle Simulator
-![logo](docs/screenshots/MSU_horizontal.png)
+![logo](docs/screenshots/CAVS_OPA_Horizontal.png)
 
 Developed at Mississippi State University (MSU), the MSU Autonomous Vehicle Simulator (MAVS) is
 
