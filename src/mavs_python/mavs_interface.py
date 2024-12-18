@@ -3143,6 +3143,8 @@ class MavsEnvironment(object):
         """
         mavs_lib.SetTimeSeconds(self.obj, ctypes.c_int(hour), ctypes.c_int(minute), ctypes.c_int(second))
         self.hour = hour
+        self.minute = minute
+        self.second = second
     def SetDate(self,year,month,day):
         """Set the date of the simulation.
 
