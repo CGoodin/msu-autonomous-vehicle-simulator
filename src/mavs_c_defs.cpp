@@ -628,7 +628,7 @@ extern "C" {
 	}
 
 	EXPORT_CMD void SetLocalOrigin(mavs::environment::Environment* env, double lat, double lon, double alt){
-		env -> SetLocalOrigin(lat,lon,alt)
+		env -> SetLocalOrigin(lat,lon,alt);
 	}
 
 	//--- Vehicle model constructors ------------//
