@@ -3200,6 +3200,18 @@ class MavsEnvironment(object):
         """
         self.wind = wind
         mavs_lib.SetWind(self.obj, ctypes.c_float(wind[0]),ctypes.c_float(wind[1]))
+    def SetLocalOrigin(self, lat, lon, alt): 
+        """Set lat lon and alt of the local origin.
+
+        Parameters:
+        lat (float): latitude of the local origin 
+        lon (float): longitude of the local origin
+        alt (float): altitude of the local origin
+        """
+        mavs_lib.SetLocalOrigin(self.obj, lat, lon, alt)
+        self.lat = lat 
+        self.long = lon
+        self.alt = alt
     def load_block(self,data):
         """Load environment parameters.
 
