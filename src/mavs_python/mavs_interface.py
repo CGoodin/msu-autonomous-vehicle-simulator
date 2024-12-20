@@ -2827,6 +2827,12 @@ class MavsEnvironment(object):
         self.second = 0
         # The scene to use
         self.scene = MavsEmbreeScene()
+        #Lat of local origin
+        self.local_origin_lat = 32.3033
+        #Lon of local origin
+        self.local_origin_lon = 90.8742
+        #Alt of local origin 
+        self.local_origin_alt = 73.152
     def __del__(self):
         """Destructor for a MavsEnvironment."""
         if (self.obj):
