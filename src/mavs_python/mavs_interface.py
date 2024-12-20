@@ -174,7 +174,7 @@ mavs_lib.GetObjectBoundingBox.argtypes = [ctypes.c_void_p, ctypes.c_int]
 mavs_lib.GetObjectBoundingBox.restype = ctypes.POINTER(ctypes.c_float)
 mavs_lib.GetObjectName.argtypes = [ctypes.c_void_p, ctypes.c_int]
 mavs_lib.GetObjectName.restype = ctypes.c_char_p
-mavs_lib.SetLocalOrigin.argtypes = [ctypes.c_double, ctypes.c_double, ctypes.c_double]
+mavs_lib.SetLocalOrigin.argtypes = [ctypes.c_void_p,ctypes.c_double, ctypes.c_double, ctypes.c_double]
 mavs_lib.SetLocalOrigin.restype = ctypes.c_void_p
 #------ Mavs Plotting utility ----------#
 mavs_lib.NewMavsPlotter.restype = ctypes.c_void_p 
