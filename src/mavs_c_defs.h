@@ -188,8 +188,6 @@ EXPORT_CMD void SetRainRate(mavs::environment::Environment* env, float rain_rate
 
 EXPORT_CMD void SetSnowRate(mavs::environment::Environment* env, float snow_rate);
 
-EXPORT_CMD void SetLocalOrigin(mavs::environment::Environment* env, double lat, double lon, double alt)
-
 /// from 0-1
 EXPORT_CMD void SetSnowAccumulation(mavs::environment::Environment* env, float snow_accum);
 
@@ -226,6 +224,8 @@ EXPORT_CMD int GetNumberOfObjectsInEnvironment(mavs::environment::Environment* e
 EXPORT_CMD char * GetObjectName(mavs::environment::Environment* env, int object_id);
 
 EXPORT_CMD float * GetObjectBoundingBox(mavs::environment::Environment* env, int object_id);
+
+EXPORT_CMD void SetLocalOrigin(mavs::environment::Environment* env, double lat, double lon, double alt);
 
 //--- Vehicle model constructors ------------//
 EXPORT_CMD mavs::vehicle::Vehicle* NewMavsRp3dVehicle();
