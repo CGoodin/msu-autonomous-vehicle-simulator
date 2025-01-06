@@ -174,6 +174,8 @@ mavs_lib.GetObjectBoundingBox.argtypes = [ctypes.c_void_p, ctypes.c_int]
 mavs_lib.GetObjectBoundingBox.restype = ctypes.POINTER(ctypes.c_float)
 mavs_lib.GetObjectName.argtypes = [ctypes.c_void_p, ctypes.c_int]
 mavs_lib.GetObjectName.restype = ctypes.c_char_p
+mavs_lib.SetLocalOrigin.argtypes = [ctypes.c_void_p,ctypes.c_double, ctypes.c_double, ctypes.c_double]
+mavs_lib.SetLocalOrigin.restype = ctypes.c_void_p
 #------ Mavs Plotting utility ----------#
 mavs_lib.NewMavsPlotter.restype = ctypes.c_void_p 
 mavs_lib.DeleteMavsPlotter.restype = ctypes.c_void_p
@@ -2825,6 +2827,12 @@ class MavsEnvironment(object):
         self.second = 0
         # The scene to use
         self.scene = MavsEmbreeScene()
+        #Lat of local origin
+        self.local_origin_lat = 32.3033
+        #Lon of local origin
+        self.local_origin_lon = 90.8742
+        #Alt of local origin 
+        self.local_origin_alt = 73.152
     def __del__(self):
         """Destructor for a MavsEnvironment."""
         if (self.obj):
@@ -3192,6 +3200,18 @@ class MavsEnvironment(object):
         """
         self.wind = wind
         mavs_lib.SetWind(self.obj, ctypes.c_float(wind[0]),ctypes.c_float(wind[1]))
+    def SetLocalOrigin(self, lat, lon, alt): 
+        """Set lat lon and alt of the local origin.
+
+        Parameters:
+        lat (float): latitude of the local origin 
+        lon (float): longitude of the local origin
+        alt (float): altitude of the local origin
+        """
+        mavs_lib.SetLocalOrigin(self.obj, ctypes.c_double(lat), ctypes.c_double(lon), ctypes.c_double(alt))
+        self.lat = lat 
+        self.long = lon
+        self.alt = alt
     def load_block(self,data):
         """Load environment parameters.
 

@@ -225,6 +225,8 @@ EXPORT_CMD char * GetObjectName(mavs::environment::Environment* env, int object_
 
 EXPORT_CMD float * GetObjectBoundingBox(mavs::environment::Environment* env, int object_id);
 
+EXPORT_CMD void SetLocalOrigin(mavs::environment::Environment* env, double lat, double lon, double alt);
+
 //--- Vehicle model constructors ------------//
 EXPORT_CMD mavs::vehicle::Vehicle* NewMavsRp3dVehicle();
 

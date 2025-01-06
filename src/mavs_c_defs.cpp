@@ -627,6 +627,10 @@ extern "C" {
 		return headlight_ids;
 	}
 
+	EXPORT_CMD void SetLocalOrigin(mavs::environment::Environment* env, double lat, double lon, double alt){
+		env -> SetLocalOrigin(lat,lon,alt);
+	}
+
 	//--- Vehicle model constructors ------------//
 	EXPORT_CMD mavs::vehicle::Vehicle* NewMavsRp3dVehicle() {
 		mavs::vehicle::Vehicle* car = new mavs::vehicle::Rp3dVehicle;
