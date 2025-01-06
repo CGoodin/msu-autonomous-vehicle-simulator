@@ -155,6 +155,12 @@ public:
 	void SetDateTime(int year, int month, int day, int hour, int minute,
 		int second, int time_zone);
 
+	/**
+	 * Set the date and time of the experiment.
+	 * \param date_time MAVS DateTime structure
+	 */
+	void SetDateTime(DateTime date_time);
+
 	/// Return the current date/time structure
 	DateTime GetDateTime() {
 		return date_time_;

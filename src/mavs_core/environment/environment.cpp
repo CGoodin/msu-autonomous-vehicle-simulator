@@ -157,6 +157,11 @@ void Environment::InitializeSkyStates() {
 	no_cloud_avg_rgb_ = GetAvgSkyRgbNoClouds();
 }
 
+void Environment::SetDateTime(DateTime date_time) {
+	date_time_.millisecond = date_time.millisecond;
+	SetDateTime(date_time.year, date_time.month, date_time.day, date_time.hour, date_time.minute, date_time.second, date_time.time_zone);
+}
+
 void Environment::SetDateTime(int year, int month, int day, int hour, int minute,
 	int second, int time_zone) {
 	date_time_.year = year;
@@ -746,6 +751,7 @@ void Environment::AdvanceTime(float dt){
 	}
 	if (scene_) scene_->UpdateAnimations(dt);
 	WindTime(dt);
+	SetDateTime(date_time_);
 }
 
 glm::vec3 Environment::GetActorPosition(int act_num) {
