@@ -29,6 +29,8 @@ set(EXAMPLES
     sky_example
     slam_example
     surface_roughness_stats2D
+	
+	date_time_example
     
 )
 if(MAVS_USE_EMBREE)

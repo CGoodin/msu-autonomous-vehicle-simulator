@@ -172,6 +172,47 @@ void Environment::SetDateTime(int year, int month, int day, int hour, int minute
 	SetTurbidity(turbidity_);
 }
 
+void Environment::WindTime(float sec) {
+	std::vector<int> days_per_month{ 31,28,31,30,31,30,31,31,30,31,30,31 };
+	if (date_time_.year % 4 == 0)days_per_month[1] = 29;
+	int num_sec = (int)floor(sec); // number of seconds to wind
+	int num_msec = (int)(1000 * sec - 1000*floor(sec)); // number of milli seconds to wind
+
+	// update milliseconds;
+	int newms = date_time_.millisecond + num_msec;
+	if (newms > 999) {
+		date_time_.millisecond = newms - 1000;
+		date_time_.second += 1;
+	}
+	else {
+		date_time_.millisecond = newms;
+	}
+	date_time_.second += num_sec;
+	while (date_time_.second >= 60) {
+		date_time_.second -= 60;
+		date_time_.minute++;
+
+		if (date_time_.minute >= 60) {
+			date_time_.minute = 0;
+			date_time_.hour++;
+
+			if (date_time_.hour >= 24) {
+				date_time_.hour = 0;
+				date_time_.day += 1;
+				int month_idx = date_time_.month - 1;
+				if (date_time_.day > days_per_month[month_idx]) {
+					date_time_.day = 1;
+					date_time_.month += 1;
+					if (date_time_.month > 12) {
+						date_time_.year += 1;
+						date_time_.month = 1;
+					}
+				}
+			}
+		}
+	}
+}
+
 void Environment::Load(std::string input_file){
 	FILE* fp = fopen(input_file.c_str(), "rb");
 	char readBuffer[65536];
@@ -703,7 +744,8 @@ void Environment::AdvanceTime(float dt){
 				actors_[a].GetScale(), actors_[a].GetId());
 		}
 	}
-	scene_->UpdateAnimations(dt);
+	if (scene_) scene_->UpdateAnimations(dt);
+	WindTime(dt);
 }
 
 glm::vec3 Environment::GetActorPosition(int act_num) {

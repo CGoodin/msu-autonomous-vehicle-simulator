@@ -715,6 +715,8 @@ public:
 
 	void FreeSkyModelStates();
 	void InitializeSkyStates();
+
+	void WindTime(float secs);
 };
 
 } //namespace environment

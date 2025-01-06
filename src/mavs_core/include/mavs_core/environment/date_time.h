@@ -24,6 +24,16 @@ namespace environment {
 * Data structure holding date and time information
 */
 struct DateTime {
+	DateTime() {
+		year = 2004;
+		month = 6;
+		day = 5;
+		hour = 14;
+		minute = 0;
+		second = 0;
+		millisecond = 0;
+		time_zone = 6;
+	}
 	/// 4 digit year
 	int year;
 	/// Month from 1 to 12
@@ -36,6 +46,8 @@ struct DateTime {
 	int minute;
 	/// Second from 0 to 59
 	int second;
+	/// millisecond from 0 to 999
+	int millisecond;
 	/// Time zone, CST=6
 	int time_zone;
 };
