@@ -3208,7 +3208,7 @@ class MavsEnvironment(object):
         lon (float): longitude of the local origin
         alt (float): altitude of the local origin
         """
-        mavs_lib.SetLocalOrigin(self.obj, lat, lon, alt)
+        mavs_lib.SetLocalOrigin(self.obj, ctypes.c_double(lat), ctypes.c_double(lon), ctypes.c_double(alt))
         self.lat = lat 
         self.long = lon
         self.alt = alt
