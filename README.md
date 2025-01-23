@@ -1,6 +1,9 @@
 # The MSU Autonomous Vehicle Simulator
 ![logo](docs/screenshots/CAVS_OPA_Horizontal.png)
 
+***MAVS HAS MOVED!!! SEE LINK BELOW:***
+[https://github.com/Mississippi-State-University-OTM/MAVS](https://github.com/Mississippi-State-University-OTM/MAVS)
+
 Developed at Mississippi State University (MSU), the MSU Autonomous Vehicle Simulator (MAVS) is
 
 * A software library for simulating autonomous vehicles in realistic digital terrain.
